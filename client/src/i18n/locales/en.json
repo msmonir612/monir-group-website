@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "organizations": "Organizations",
+    "contact": "Contact"
+  },
+
+  "hero": {
+    "eyebrow": "MONIR GROUP",
+    "title1": "Building Businesses,",
+    "title2": "Creating Opportunities.",
+    "description": "Our goal is to bring business, education and community initiatives together through a strong and sustainable platform.",
+    "organizations": "Our Organizations",
+    "about": "About Us"
+  },
+
+  "about": {
+    "label": "MONIR GROUP",
+    "title": "One Group, One Big Vision.",
+    "description": "MONIR GROUP is a platform bringing initiatives from different sectors together under one umbrella for sustainable and long-term growth.",
+    "vision": "OUR VISION",
+    "visionTitle": "Creating Opportunities",
+    "visionDescription": "Creating new opportunities for people through responsible and modern initiatives."
+  },
+
+  "organizations": {
+    "label": "OUR ORGANIZATIONS",
+    "title": "Our Organizations",
+    "description": "Different organizations and initiatives under MONIR GROUP.",
+
+    "enterprise": {
+      "type": "BUSINESS",
+      "title": "M/S MONIR ENTERPRISE",
+      "description": "Business and management of rice, feed, husk, broken rice, bran and LPG gas.",
+      "button": "Explore"
+    },
+
+    "academy": {
+      "type": "EDUCATION",
+      "title": "MONIR ACADEMY",
+      "description": "An initiative focused on education, training, students and the next generation.",
+      "button": "Explore"
+    },
+
+    "association": {
+      "type": "COMMUNITY",
+      "title": "MONIR FRIEND ASSOCIATION",
+      "description": "A platform for friendship, membership activities, events and community initiatives.",
+      "button": "Explore"
+    }
+  },
+  "agricultural": {
+  "type": "Agricultural Wholesale Trading",
+  "title": "M/S MONIR ENTERPRISE — Agricultural Trading Division",
+  "description": "Manage paddy, jute, wheat, mustard and maize purchases, sales, inventory, warehouses and accounts.",
+  "button": "Explore Agricultural Trading"
+},
+
+  "contact": {
+    "label": "MONIR GROUP",
+    "title": "Let's build something meaningful together.",
+    "description": "Contact us for your questions, needs or future collaboration.",
+    "button": "Contact Us"
+  },
+
+  "footer": {
+    "tagline": "Business • Education • Community",
+    "rights": "All rights reserved."
+  },
+
+  "language": {
+    "bn": "বাংলা",
+    "en": "English"
+  }
+}
