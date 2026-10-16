@@ -7,6 +7,7 @@ import MonirEnterprise from "./pages/MonirEnterprise/MonirEnterprise";
 import MonirAcademy from "./pages/MonirAcademy/MonirAcademy";
 import MonirFriendAssociation from "./pages/MonirFriendAssociation/MonirFriendAssociation";
 import AgriculturalTrading from "./pages/AgriculruralTrading/Agriculturaltrading";
+import Login from "./pages/MonirEnterprise/erp/Login";
 
 function App() {
   return (
@@ -24,7 +25,10 @@ function App() {
         path="/monir-academy"
         element={<MonirAcademy />}
       />
-
+      <Route
+        path="/m-s-monir-enterprise/login"
+        element={<Login />}
+      />
       <Route
         path="/monir-friend-association"
         element={<MonirFriendAssociation />}
