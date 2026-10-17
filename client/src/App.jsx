@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-
+import Dashboard from "./pages/MonirEnterprise/erp/Dashboard";
 import MonirEnterprise from "./pages/MonirEnterprise/MonirEnterprise";
 import MonirAcademy from "./pages/MonirAcademy/MonirAcademy";
 import MonirFriendAssociation from "./pages/MonirFriendAssociation/MonirFriendAssociation";
@@ -19,6 +19,10 @@ function App() {
       <Route
         path="/m-s-monir-enterprise"
         element={<MonirEnterprise />}
+      />
+      <Route
+        path="/m-s-monir-enterprise/erp/dashboard"
+        element={<Dashboard />}
       />
 
       <Route
