@@ -64,42 +64,12 @@ const summaryCards = [
 ];
 
 const quickActions = [
-  {
-    id: "sales",
-    icon: "🛒",
-    label: { bn: "নতুন বিক্রি", en: "New Sale" },
-    color: "bg-emerald-600",
-  },
-  {
-    id: "purchase",
-    icon: "📥",
-    label: { bn: "নতুন ক্রয়", en: "New Purchase" },
-    color: "bg-blue-600",
-  },
-  {
-    id: "products",
-    icon: "📦",
-    label: { bn: "পণ্য যোগ", en: "Add Product" },
-    color: "bg-orange-500",
-  },
-  {
-    id: "customers",
-    icon: "👤",
-    label: { bn: "কাস্টমার", en: "Customer" },
-    color: "bg-violet-600",
-  },
-  {
-    id: "lpg",
-    icon: "🔥",
-    label: { bn: "LPG বিক্রি", en: "LPG Sale" },
-    color: "bg-red-500",
-  },
-  {
-    id: "reports",
-    icon: "📊",
-    label: { bn: "রিপোর্ট", en: "Generate Report" },
-    color: "bg-teal-600",
-  },
+  { id: "sales", icon: "🛒", label: { bn: "নতুন বিক্রি", en: "New Sale" }, color: "bg-emerald-600" },
+  { id: "purchase", icon: "📥", label: { bn: "নতুন ক্রয়", en: "New Purchase" }, color: "bg-blue-600" },
+  { id: "products", icon: "📦", label: { bn: "পণ্য যোগ", en: "Add Product" }, color: "bg-orange-500" },
+  { id: "customers", icon: "👤", label: { bn: "কাস্টমার", en: "Customer" }, color: "bg-violet-600" },
+  { id: "lpg", icon: "🔥", label: { bn: "LPG বিক্রি", en: "LPG Sale" }, color: "bg-red-500" },
+  { id: "reports", icon: "📊", label: { bn: "রিপোর্ট", en: "Generate Report" }, color: "bg-teal-600" },
 ];
 
 const translations = {
@@ -134,17 +104,13 @@ const translations = {
     open: "খুলুন",
     back: "ড্যাশবোর্ডে ফিরুন",
     coming: "এই বিভাগের ফর্ম ও প্রকৃত হিসাবের API পরবর্তী ধাপে যুক্ত হবে।",
-    investorNote:
-      "প্রত্যেক ইনভেস্টরের চুক্তি, মূলধন, চুক্তি অনুযায়ী লাভ, ফেরত ও পাওনা আলাদাভাবে সংরক্ষণ করা হবে।",
-    loanNote:
-      "হাওলাত সুদবিহীন হবে। মূল টাকা, তারিখ, আংশিক পরিশোধ ও অবশিষ্ট দেনা বা পাওনা সংরক্ষণ করা হবে।",
+    investorNote: "প্রত্যেক ইনভেস্টরের চুক্তি, মূলধন, চুক্তি অনুযায়ী লাভ, ফেরত ও পাওনা আলাদাভাবে সংরক্ষণ করা হবে।",
+    loanNote: "হাওলাত সুদবিহীন হবে। মূল টাকা, তারিখ, আংশিক পরিশোধ ও অবশিষ্ট দেনা বা পাওনা সংরক্ষণ করা হবে।",
     help: "সাহায্য প্রয়োজন?",
     helpText: "আপনার দোকানের অ্যাডমিনের সঙ্গে যোগাযোগ করুন।",
     footer: "M/S MONIR ENTERPRISE | ERP সিস্টেম",
-    noFinancialData:
-      "হিসাবের API যুক্ত না হওয়া পর্যন্ত প্রকৃত আর্থিক তথ্য দেখানো হবে না।",
+    noFinancialData: "হিসাবের API যুক্ত না হওয়া পর্যন্ত প্রকৃত আর্থিক তথ্য দেখানো হবে না।",
     logout: "লগআউট",
-    menu: "মেনু খুলুন",
   },
   en: {
     welcome: "Welcome to",
@@ -177,26 +143,20 @@ const translations = {
     open: "Open",
     back: "Back to Dashboard",
     coming: "Forms and working APIs for this section will be added in the next steps.",
-    investorNote:
-      "Each investor's agreement, capital, agreed profit, repayments and outstanding balance will be recorded separately.",
-    loanNote:
-      "Loans will be interest-free. Principal, dates, partial repayments and remaining balances will be recorded.",
+    investorNote: "Each investor's agreement, capital, agreed profit, repayments and outstanding balance will be recorded separately.",
+    loanNote: "Loans will be interest-free. Principal, dates, partial repayments and remaining balances will be recorded.",
     help: "Need Help?",
     helpText: "Please contact your shop administrator.",
     footer: "M/S MONIR ENTERPRISE | ERP System",
-    noFinancialData:
-      "Real financial figures will not be shown until the accounting API is connected.",
+    noFinancialData: "Real financial figures will not be shown until the accounting API is connected.",
     logout: "Logout",
-    menu: "Open menu",
   },
 };
 
 export default function Dashboard() {
-  const [language, setLanguage] = useState(() => {
-    const savedLanguage = localStorage.getItem("monirEnterpriseLanguage");
-    return savedLanguage === "en" ? "en" : "bn";
-  });
-
+  const [language, setLanguage] = useState(
+    () => localStorage.getItem("monirEnterpriseLanguage") || "bn"
+  );
   const [active, setActive] = useState("dashboard");
   const [mobileMenu, setMobileMenu] = useState(false);
 
@@ -221,35 +181,43 @@ export default function Dashboard() {
     window.location.assign("/m-s-monir-enterprise/login");
   };
 
+  const titleFor = (id, bn, en) => {
+    if (id === "investors") return t.investorTitle;
+    if (id === "loans-taken") return t.takenTitle;
+    if (id === "loans-given") return t.givenTitle;
+    return isBangla ? bn : en;
+  };
+
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 font-sans">
-      <header className="sticky top-0 z-40 flex min-h-[80px] flex-wrap items-center justify-between gap-3 bg-[#062b55] px-4 py-3 text-white shadow-lg sm:px-6 lg:px-8">
+    <div
+      className={`min-h-screen bg-slate-100 text-slate-800 ${
+        isBangla ? "font-sans" : "font-sans"
+      }`}
+    >
+      <header className="sticky top-0 z-40 flex min-h-[76px] flex-wrap items-center justify-between gap-3 bg-[#062b55] px-4 py-3 text-white shadow-lg sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
           <button
             type="button"
             onClick={() => setMobileMenu(!mobileMenu)}
-            aria-label={t.menu}
-            aria-expanded={mobileMenu}
-            className="rounded-lg bg-white/10 px-4 py-3 text-2xl lg:hidden"
+            aria-label="Open menu"
+            className="rounded-lg bg-white/10 px-4 py-3 text-xl lg:hidden"
           >
             ☰
           </button>
 
           <div className="hidden items-center gap-3 sm:flex">
-            <span className="text-4xl font-black text-amber-400">MG</span>
+            <span className="text-3xl font-black text-amber-400">MG</span>
             <div className="hidden border-r border-white/20 pr-4 md:block">
-              <p className="text-lg font-extrabold">MONIR GROUP</p>
-              <p className="text-sm text-blue-100">
-                Together for a Better Tomorrow
-              </p>
+              <p className="text-base font-extrabold">MONIR GROUP</p>
+              <p className="text-xs text-blue-100">Together for a Better Tomorrow</p>
             </div>
           </div>
 
           <div className="min-w-0 border-l border-white/20 pl-3">
-            <p className="truncate text-lg font-extrabold sm:text-2xl">
+            <p className="truncate text-base font-extrabold sm:text-xl">
               🏪 M/S MONIR ENTERPRISE
             </p>
-            <p className="mt-1 text-sm text-blue-100 sm:text-base">
+            <p className="mt-1 text-xs text-blue-100 sm:text-sm">
               Rice | Feed | Bhushi | Khud | Kura | LPG Gas
             </p>
           </div>
@@ -259,7 +227,7 @@ export default function Dashboard() {
           <input
             aria-label={t.search}
             placeholder={`⌕  ${t.search}`}
-            className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-lg text-white outline-none placeholder:text-blue-100 focus:bg-white/15"
+            className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-base text-white outline-none placeholder:text-blue-100 focus:bg-white/15"
           />
         </div>
 
@@ -269,10 +237,8 @@ export default function Dashboard() {
               type="button"
               onClick={() => setLanguage("bn")}
               aria-pressed={isBangla}
-              className={`rounded-lg px-3 py-2 text-base font-bold transition sm:px-4 ${
-                isBangla
-                  ? "bg-white text-[#062b55]"
-                  : "text-white hover:bg-white/10"
+              className={`rounded-lg px-3 py-2 text-sm font-bold transition sm:px-4 ${
+                isBangla ? "bg-white text-[#062b55]" : "text-white hover:bg-white/10"
               }`}
             >
               🇧🇩 বাংলা
@@ -281,10 +247,8 @@ export default function Dashboard() {
               type="button"
               onClick={() => setLanguage("en")}
               aria-pressed={!isBangla}
-              className={`rounded-lg px-3 py-2 text-base font-bold transition sm:px-4 ${
-                !isBangla
-                  ? "bg-white text-[#062b55]"
-                  : "text-white hover:bg-white/10"
+              className={`rounded-lg px-3 py-2 text-sm font-bold transition sm:px-4 ${
+                !isBangla ? "bg-white text-[#062b55]" : "text-white hover:bg-white/10"
               }`}
             >
               🇬🇧 English
@@ -292,16 +256,15 @@ export default function Dashboard() {
           </div>
 
           <div className="hidden text-right sm:block">
-            <p className="text-base font-bold">{t.admin}</p>
-            <p className="text-sm text-blue-100">{t.administrator}</p>
+            <p className="text-sm font-bold">{t.admin}</p>
+            <p className="text-xs text-blue-100">{t.administrator}</p>
           </div>
 
           <button
             type="button"
             onClick={logout}
             title={t.logout}
-            aria-label={t.logout}
-            className="rounded-lg px-3 py-2 text-xl hover:bg-white/10"
+            className="rounded-lg px-3 py-2 text-lg hover:bg-white/10"
           >
             ↪
           </button>
@@ -317,15 +280,15 @@ export default function Dashboard() {
         />
       )}
 
-      <div className="flex min-h-[calc(100vh-80px)]">
+      <div className="flex min-h-[calc(100vh-76px)]">
         <aside
-          className={`fixed bottom-0 top-[80px] z-30 w-72 overflow-y-auto bg-gradient-to-b from-[#073768] to-[#031e3d] p-4 text-white shadow-xl transition-transform lg:sticky lg:top-[80px] lg:h-[calc(100vh-80px)] lg:translate-x-0 ${
+          className={`fixed bottom-0 top-[76px] z-30 w-72 overflow-y-auto bg-gradient-to-b from-[#073768] to-[#031e3d] p-4 text-white shadow-xl transition-transform lg:sticky lg:top-[76px] lg:h-[calc(100vh-76px)] lg:translate-x-0 ${
             mobileMenu ? "translate-x-0" : "-translate-x-full"
           }`}
         >
           {menuGroups.map((group) => (
             <div key={group.title.en} className="mb-6">
-              <p className="mb-3 px-3 text-sm font-bold tracking-widest text-blue-200/80">
+              <p className="mb-3 px-3 text-xs font-bold tracking-widest text-blue-200/70">
                 {group.title[language]}
               </p>
 
@@ -334,22 +297,20 @@ export default function Dashboard() {
                   type="button"
                   key={id}
                   onClick={() => go(id)}
-                  className={`mb-1 flex min-h-12 w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-lg transition ${
+                  className={`mb-1 flex min-h-12 w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-base transition ${
                     active === id
                       ? "bg-blue-500 font-bold text-white shadow-md"
                       : "text-blue-50 hover:bg-white/10"
                   }`}
                 >
-                  <span className="w-7 shrink-0 text-center text-xl">
-                    {icon}
-                  </span>
+                  <span className="w-7 shrink-0 text-center text-lg">{icon}</span>
                   <span>{isBangla ? bn : en}</span>
                 </button>
               ))}
             </div>
           ))}
 
-          <div className="mt-5 rounded-xl border border-blue-400/30 bg-blue-950/50 p-4 text-base leading-7 text-blue-100">
+          <div className="mt-5 rounded-xl border border-blue-400/30 bg-blue-950/50 p-4 text-sm leading-6 text-blue-100">
             <p className="font-bold text-white">{t.help}</p>
             <p>{t.helpText}</p>
           </div>
@@ -361,7 +322,7 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 gap-5 2xl:grid-cols-[minmax(0,1fr)_340px]">
                 <section className="relative flex min-h-[230px] items-center overflow-hidden rounded-2xl bg-gradient-to-r from-[#063e34] via-[#075b49] to-[#718c50] p-6 text-white shadow-md sm:min-h-[270px] sm:p-9">
                   <div className="relative z-10 max-w-3xl">
-                    <p className="text-xl font-semibold text-emerald-100 sm:text-2xl">
+                    <p className="text-lg font-semibold text-emerald-100 sm:text-xl">
                       {t.welcome}
                     </p>
                     <h1 className="mt-2 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
@@ -370,7 +331,7 @@ export default function Dashboard() {
                     <p className="mt-3 text-xl font-bold sm:text-2xl">
                       {t.subtitle}
                     </p>
-                    <p className="mt-5 text-base font-semibold leading-7 text-emerald-50 sm:text-lg">
+                    <p className="mt-5 text-sm font-semibold leading-7 text-emerald-50 sm:text-base">
                       🌾 {t.productsLine}
                     </p>
                   </div>
@@ -380,31 +341,26 @@ export default function Dashboard() {
                 </section>
 
                 <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                  <p className="text-lg font-bold text-[#063568]">
-                    📅 {t.today}
-                  </p>
-                  <p className="mt-2 text-lg font-semibold text-slate-700">
-                    {new Date().toLocaleDateString(
-                      language === "bn" ? "bn-BD" : "en-GB",
-                      {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      }
-                    )}
+                  <p className="text-base font-bold text-[#063568]">📅 {t.today}</p>
+                  <p className="mt-2 text-base font-semibold text-slate-700">
+                    {new Date().toLocaleDateString(language === "bn" ? "bn-BD" : "en-GB", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
                   </p>
 
                   <div className="mt-5 border-t border-slate-200 pt-5">
-                    <h2 className="mb-4 text-xl font-extrabold text-[#063568]">
+                    <h2 className="mb-4 text-lg font-extrabold text-[#063568]">
                       ⚡ {t.quickActions}
                     </h2>
                     <div className="grid grid-cols-2 gap-3">
                       {quickActions.map((action) => (
                         <button
-                          key={action.id}
+                          key={action.id + action.label.en}
                           type="button"
                           onClick={() => go(action.id)}
-                          className={`${action.color} min-h-14 rounded-xl px-3 py-3 text-base font-bold text-white shadow-sm transition hover:brightness-110 active:scale-[0.98] sm:text-lg`}
+                          className={`${action.color} min-h-14 rounded-xl px-3 py-3 text-sm font-bold text-white shadow-sm transition hover:brightness-110 active:scale-[0.98] sm:text-base`}
                         >
                           <span className="mr-1">{action.icon}</span>
                           {action.label[language]}
@@ -416,7 +372,7 @@ export default function Dashboard() {
               </div>
 
               <section className="mt-6">
-                <h2 className="mb-4 text-2xl font-extrabold sm:text-3xl">
+                <h2 className="mb-4 text-xl font-extrabold sm:text-2xl">
                   {t.overview}
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
@@ -425,18 +381,16 @@ export default function Dashboard() {
                       key={card.title.en}
                       className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm sm:p-6"
                     >
-                      <div
-                        className={`flex h-14 w-14 items-center justify-center rounded-2xl text-2xl text-white ${card.color}`}
-                      >
+                      <div className={`flex h-14 w-14 items-center justify-center rounded-2xl text-2xl text-white ${card.color}`}>
                         {card.icon}
                       </div>
-                      <h3 className="mt-4 text-lg font-bold text-slate-600 sm:text-xl">
+                      <h3 className="mt-4 text-base font-bold text-slate-600 sm:text-lg">
                         {card.title[language]}
                       </h3>
-                      <p className="mt-3 text-3xl font-extrabold text-[#08366b] sm:text-4xl">
+                      <p className="mt-3 text-2xl font-extrabold text-[#08366b] sm:text-3xl">
                         —
                       </p>
-                      <p className="mt-2 text-base leading-6 text-slate-500">
+                      <p className="mt-2 text-sm leading-5 text-slate-500">
                         {t.noData}
                       </p>
                     </article>
@@ -446,19 +400,19 @@ export default function Dashboard() {
 
               <div className="mt-6 grid grid-cols-1 gap-5 xl:grid-cols-3">
                 <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6 xl:col-span-2">
-                  <h2 className="text-xl font-extrabold text-[#063568] sm:text-2xl">
+                  <h2 className="text-lg font-extrabold text-[#063568] sm:text-xl">
                     📈 {t.chart}
                   </h2>
-                  <div className="mt-5 flex min-h-52 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-lg leading-8 text-slate-500">
+                  <div className="mt-5 flex min-h-52 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-base leading-7 text-slate-500">
                     {t.chartDescription}
                   </div>
                 </section>
 
                 <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                  <h2 className="text-xl font-extrabold text-[#063568] sm:text-2xl">
+                  <h2 className="text-lg font-extrabold text-[#063568] sm:text-xl">
                     📒 {t.ledger}
                   </h2>
-                  <p className="mt-4 text-lg leading-8 text-slate-500">
+                  <p className="mt-4 text-base leading-7 text-slate-500">
                     {t.ledgerDescription}
                   </p>
                 </section>
@@ -474,10 +428,10 @@ export default function Dashboard() {
                     key={title}
                     className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
                   >
-                    <h2 className="text-xl font-extrabold text-[#063568] sm:text-2xl">
+                    <h2 className="text-lg font-extrabold text-[#063568] sm:text-xl">
                       {icon} {title}
                     </h2>
-                    <p className="mt-4 text-lg leading-8 text-slate-500">
+                    <p className="mt-4 text-base leading-7 text-slate-500">
                       {description}
                     </p>
                   </section>
@@ -485,29 +439,14 @@ export default function Dashboard() {
               </div>
 
               <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                <h2 className="text-2xl font-extrabold text-[#063568] sm:text-3xl">
+                <h2 className="text-xl font-extrabold text-[#063568] sm:text-2xl">
                   🤝 {t.finance}
                 </h2>
                 <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-3">
                   {[
-                    [
-                      "investors",
-                      t.investorTitle,
-                      t.investorDescription,
-                      "bg-emerald-50",
-                    ],
-                    [
-                      "loans-taken",
-                      t.takenTitle,
-                      t.takenDescription,
-                      "bg-blue-50",
-                    ],
-                    [
-                      "loans-given",
-                      t.givenTitle,
-                      t.givenDescription,
-                      "bg-violet-50",
-                    ],
+                    ["investors", t.investorTitle, t.investorDescription, "bg-emerald-50"],
+                    ["loans-taken", t.takenTitle, t.takenDescription, "bg-blue-50"],
+                    ["loans-given", t.givenTitle, t.givenDescription, "bg-violet-50"],
                   ].map(([id, title, description, color]) => (
                     <button
                       key={id}
@@ -515,11 +454,11 @@ export default function Dashboard() {
                       onClick={() => go(id)}
                       className={`${color} min-h-40 rounded-2xl border border-slate-200 p-5 text-left transition hover:border-blue-400 hover:shadow-md sm:p-6`}
                     >
-                      <h3 className="text-xl font-extrabold">{title}</h3>
-                      <p className="mt-3 text-lg leading-8 text-slate-600">
+                      <h3 className="text-lg font-extrabold">{title}</h3>
+                      <p className="mt-3 text-base leading-7 text-slate-600">
                         {description}
                       </p>
-                      <p className="mt-4 text-lg font-bold text-blue-700">
+                      <p className="mt-4 text-base font-bold text-blue-700">
                         {t.open} →
                       </p>
                     </button>
@@ -527,26 +466,26 @@ export default function Dashboard() {
                 </div>
               </section>
 
-              <p className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-base leading-7 text-amber-900">
+              <p className="mt-5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
                 ⚠️ {t.noFinancialData}
               </p>
             </>
           ) : (
             <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-              <p className="text-base font-bold text-blue-700">
+              <p className="text-sm font-bold text-blue-700">
                 M/S MONIR ENTERPRISE ERP
               </p>
-              <h1 className="mt-3 text-3xl font-extrabold sm:text-4xl">
+              <h1 className="mt-3 text-2xl font-extrabold sm:text-3xl">
                 {current ? current[isBangla ? 1 : 2] : "ERP"}
               </h1>
-              <p className="mt-4 text-lg leading-8 text-slate-600">
+              <p className="mt-4 text-base leading-7 text-slate-600">
                 {t.coming}
               </p>
 
               {(active === "investors" ||
                 active === "loans-taken" ||
                 active === "loans-given") && (
-                <div className="mt-6 rounded-xl bg-blue-50 p-5 text-lg leading-8 text-blue-950 sm:p-6">
+                <div className="mt-6 rounded-xl bg-blue-50 p-5 text-base leading-7 text-blue-950 sm:p-6">
                   {active === "investors" ? t.investorNote : t.loanNote}
                 </div>
               )}
@@ -554,14 +493,14 @@ export default function Dashboard() {
               <button
                 type="button"
                 onClick={() => go("dashboard")}
-                className="mt-6 min-h-12 rounded-xl bg-[#063568] px-6 py-3 text-lg font-bold text-white hover:bg-blue-900"
+                className="mt-6 min-h-12 rounded-xl bg-[#063568] px-6 py-3 text-base font-bold text-white hover:bg-blue-900"
               >
                 ← {t.back}
               </button>
             </section>
           )}
 
-          <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 py-5 text-base text-slate-500">
+          <footer className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 py-5 text-sm text-slate-500">
             <span>{t.footer}</span>
             <span>MONIR GROUP · Together We Grow</span>
           </footer>
